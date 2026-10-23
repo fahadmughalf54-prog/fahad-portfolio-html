@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bazaar Mart | Demo Online Store</title>
+<style>
+:root{--ink:#14181f;--bg:#f6f4ef;--card:#fff;--acc:#0f766e;--acc2:#e8b04b;--mute:#667085}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+.demo-bar{background:var(--acc2);text-align:center;font-weight:600;font-size:13px;padding:8px 12px}
+.demo-bar a{text-decoration:underline}
+header{background:var(--ink);color:#fff;position:sticky;top:0;z-index:5}
+.bar{max-width:1040px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:800;font-size:20px;color:var(--acc2)}
+.cartbtn{min-height:44px;padding:0 18px;border-radius:99px;border:2px solid var(--acc2);background:none;color:#fff;font:700 15px system-ui;cursor:pointer}
+.hero{background:linear-gradient(120deg,var(--acc),#134e4a);color:#fff;text-align:center;padding:56px 20px}
+.hero h1{font-size:clamp(30px,7vw,48px);margin-bottom:8px}
+main{max-width:1040px;margin:0 auto;padding:36px 20px 60px}
+h2{margin-bottom:18px}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.f{min-height:44px;padding:0 18px;border-radius:99px;border:1px solid #cfd4dc;background:#fff;font:600 14px system-ui;cursor:pointer}
+.f.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.p{background:var(--card);border-radius:18px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.06);display:flex;flex-direction:column}
+.pic{height:150px;display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:800;color:rgba(255,255,255,.9)}
+.pb{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pb h3{font-size:17px}.pb .c{color:var(--mute);font-size:13px}
+.pr{font-weight:800;color:var(--acc);font-size:18px}
+.add{margin-top:auto;min-height:44px;border:0;border-radius:12px;background:var(--acc);color:#fff;font:700 15px system-ui;cursor:pointer}
+.panel{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;justify-content:flex-end;z-index:20}
+.panel.open{display:flex}
+.drawer{background:#fff;width:min(420px,100%);height:100%;overflow:auto;padding:22px;display:flex;flex-direction:column;gap:14px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid #eee;padding-bottom:10px}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:36px;height:36px;border-radius:50%;border:1px solid #cfd4dc;background:#fff;font-size:18px;cursor:pointer}
+.tot{font-weight:800;font-size:20px;display:flex;justify-content:space-between}
+input,textarea{width:100%;border:1px solid #cfd4dc;border-radius:12px;padding:12px;font:16px system-ui;min-height:46px}
+label{font-weight:600;font-size:14px;display:block;margin-bottom:4px}
+.close{align-self:flex-end;min-height:44px;border:0;background:none;font:600 15px system-ui;cursor:pointer}
+footer{text-align:center;padding:30px 20px;color:var(--mute);font-size:14px}
+footer a{color:var(--acc);font-weight:600}
+</style>
+</head>
+<body>
+<div class="demo-bar">DEMO store, a sample made by <a href="https://wa.me/923101871934" target="_blank" rel="noopener">Fahad Mughal</a>. Products aur prices farzi hain.</div>
+<header><div class="bar"><div class="logo">Bazaar Mart</div><button class="cartbtn" id="open" type="button">Cart (<span id="cnt">0</span>)</button></div></header>
+<div class="hero"><h1>Roz Marra Ki Cheezein, Ghar Tak</h1><p>Cart mein daalein, WhatsApp par order bhejein. Cash on delivery.</p></div>
+<main>
+<h2>Products</h2>
+<div class="filters" id="filters"></div>
+<div class="grid" id="grid"></div>
+</main>
+<footer>Demo store. Apni online dukaan chahiye? <a href="https://wa.me/923101871934">Fahad Mughal se rabta karein</a></footer>
+
+<div class="panel" id="panel"><div class="drawer">
+<button class="close" id="close" type="button">Close</button>
+<h2>Your Cart</h2>
+<div id="items"></div>
+<div class="tot"><span>Total</span><span id="total">Rs 0</span></div>
+<div><label for="cn">Name</label><input id="cn"></div>
+<div><label for="ca">Delivery Address</label><textarea id="ca"></textarea></div>
+<button class="add" id="co" type="button" style="min-height:48px">Place Order on WhatsApp</button>
+</div></div>
+
+<script>
+var WA="923101871934";
+var P=[["Leather Wallet","Accessories",1200,"#0f766e"],["Wireless Earbuds","Electronics",3500,"#1d4ed8"],["Cotton Kurta","Clothing",2200,"#b45309"],["Water Bottle","Home",650,"#7c3aed"],["Backpack","Accessories",2800,"#be123c"],["Phone Stand","Electronics",450,"#0369a1"],["Bedsheet Set","Home",3200,"#047857"],["Lawn Shawl","Clothing",1800,"#a21caf"]];
+var cat="All",cart={};
+function $(i){return document.getElementById(i)}
+function fm(n){return "Rs "+n.toLocaleString("en-US")}
+var cats=["All"].concat(P.map(function(p){return p[1]}).filter(function(v,i,a){return a.indexOf(v)===i}));
+cats.forEach(function(c){var b=document.createElement('button');b.type='button';b.className='f';b.textContent=c;b.onclick=function(){cat=c;draw()};$('filters').appendChild(b)});
+function draw(){
+ Array.prototype.forEach.call($('filters').children,function(b){b.classList.toggle('on',b.textContent===cat)});
+ $('grid').textContent='';
+ P.forEach(function(p,i){ if(cat!=="All"&&p[1]!==cat)return;
+  var d=document.createElement('div');d.className='p';
+  var pic=document.createElement('div');pic.className='pic';pic.style.background=p[3];pic.textContent=p[0].charAt(0);
+  var b=document.createElement('div');b.className='pb';
+  var h=document.createElement('h3');h.textContent=p[0];var c=document.createElement('div');c.className='c';c.textContent=p[1];
+  var pr=document.createElement('div');pr.className='pr';pr.textContent=fm(p[2]);
+  var a=document.createElement('button');a.className='add';a.type='button';a.textContent='Add to Cart';a.onclick=function(){cart[i]=(cart[i]||0)+1;upd()};
+  b.appendChild(h);b.appendChild(c);b.appendChild(pr);b.appendChild(a);d.appendChild(pic);d.appendChild(b);$('grid').appendChild(d);});
+}
+function upd(){
+ var n=0,t=0;$('items').textContent='';
+ Object.keys(cart).forEach(function(k){var q=cart[k];if(!q)return;var p=P[k];n+=q;t+=q*p[2];
+  var r=document.createElement('div');r.className='row';
+  var l=document.createElement('div');l.textContent=p[0]+" - "+fm(p[2]);
+  var qd=document.createElement('div');qd.className='qty';
+  var m=document.createElement('button');m.type='button';m.textContent='-';m.setAttribute('aria-label','Decrease');m.onclick=function(){cart[k]--;upd()};
+  var s=document.createElement('span');s.textContent=q;
+  var pl=document.createElement('button');pl.type='button';pl.textContent='+';pl.setAttribute('aria-label','Increase');pl.onclick=function(){cart[k]++;upd()};
+  qd.appendChild(m);qd.appendChild(s);qd.appendChild(pl);r.appendChild(l);r.appendChild(qd);$('items').appendChild(r);});
+ if(!n){var e=document.createElement('p');e.textContent='Cart khali hai.';$('items').appendChild(e)}
+ $('cnt').textContent=n;$('total').textContent=fm(t);
+}
+$('open').onclick=function(){$('panel').classList.add('open')};
+$('close').onclick=function(){$('panel').classList.remove('open')};
+$('co').onclick=function(){
+ var lines=[],t=0;Object.keys(cart).forEach(function(k){if(cart[k]){var p=P[k];lines.push(cart[k]+" x "+p[0]+" = "+fm(cart[k]*p[2]));t+=cart[k]*p[2]}});
+ if(!lines.length){alert('Pehle cart mein kuch daalein.');return}
+ if(!$('cn').value.trim()||!$('ca').value.trim()){alert('Naam aur address likhein.');return}
+ var m="New order [Demo Store]\n"+lines.join("\n")+"\nTotal: "+fm(t)+"\nName: "+$('cn').value+"\nAddress: "+$('ca').value;
+ window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(m),"_blank","noopener");};
+draw();upd();
+</script>
+</body>
+</html>

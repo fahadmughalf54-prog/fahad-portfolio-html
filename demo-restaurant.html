@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dera Spice Kitchen | Demo Restaurant Website</title>
+<style>
+:root{--bg:#1a0f0a;--card:#2a1912;--gold:#e8a33d;--cream:#f6ead9;--mute:#c9b39b}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--bg);color:var(--cream);line-height:1.6}
+a{color:inherit;text-decoration:none}
+.demo-bar{background:var(--gold);color:#1a0f0a;text-align:center;font:600 13px system-ui,sans-serif;padding:8px 12px}
+.demo-bar a{text-decoration:underline}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;flex-wrap:wrap;max-width:1040px;margin:0 auto}
+.logo{font-size:22px;font-weight:700;color:var(--gold)}
+nav{display:flex;gap:18px;font:500 15px system-ui,sans-serif}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 22px;border-radius:99px;background:var(--gold);color:#1a0f0a;font:700 15px system-ui,sans-serif;border:0;cursor:pointer}
+.btn.o{background:transparent;color:var(--gold);border:2px solid var(--gold)}
+.hero{text-align:center;padding:80px 20px 70px;background:radial-gradient(circle at 50% 0,#4a2a14 0,var(--bg) 70%)}
+.hero h1{font-size:clamp(36px,8vw,64px);line-height:1.1;margin-bottom:14px}
+.hero p{color:var(--mute);max-width:520px;margin:0 auto 26px;font-size:18px}
+section{max-width:1040px;margin:0 auto;padding:56px 20px}
+h2{font-size:clamp(28px,5vw,38px);color:var(--gold);margin-bottom:8px}
+.sub{color:var(--mute);margin-bottom:28px}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.tab{min-height:44px;padding:0 20px;border-radius:99px;border:1px solid #5a3b27;background:transparent;color:var(--cream);font:600 15px system-ui,sans-serif;cursor:pointer}
+.tab.on{background:var(--gold);color:#1a0f0a;border-color:var(--gold)}
+.menu{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.item{background:var(--card);border-radius:16px;padding:18px;display:flex;justify-content:space-between;gap:14px;align-items:center}
+.item h3{font-size:18px}.item p{color:var(--mute);font-size:14px}
+.price{color:var(--gold);font:700 17px system-ui,sans-serif;white-space:nowrap;margin-bottom:8px;text-align:right}
+.order{min-height:40px;padding:0 14px;border-radius:99px;border:1px solid var(--gold);background:none;color:var(--gold);font:600 13px system-ui,sans-serif;cursor:pointer}
+form{display:grid;gap:14px;max-width:560px}
+label{font:600 14px system-ui,sans-serif;display:block;margin-bottom:6px}
+input,select,textarea{width:100%;background:var(--card);color:var(--cream);border:1px solid #5a3b27;border-radius:12px;padding:12px;font:16px system-ui,sans-serif;min-height:46px}
+footer{text-align:center;color:var(--mute);padding:36px 20px 60px;border-top:1px solid #3a2518;font:14px system-ui,sans-serif}
+.hours{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.hours div{background:var(--card);border-radius:16px;padding:18px}
+</style>
+</head>
+<body>
+<div class="demo-bar">DEMO website, a sample made by <a href="https://wa.me/923101871934" target="_blank" rel="noopener">Fahad Mughal</a>. Business name aur menu farzi hain.</div>
+<header><div class="logo">Dera Spice Kitchen</div>
+<nav><a href="#menu">Menu</a><a href="#book">Book a Table</a><a href="#visit">Visit</a></nav></header>
+
+<div class="hero">
+<h1>Asli Desi Zaiqa,<br>Garam Garam Table Par</h1>
+<p>Charcoal grill, fresh naan aur ghar jaisa salan. Menu dekhein aur WhatsApp par order karein.</p>
+<a class="btn" href="#menu">View Menu</a> <a class="btn o" href="#book">Book a Table</a>
+</div>
+
+<section id="menu">
+<h2>Our Menu</h2><p class="sub">Order dabane par WhatsApp khulega aur order ka message tayar milega.</p>
+<div class="tabs" id="tabs"></div>
+<div class="menu" id="menu-grid"></div>
+</section>
+
+<section id="book">
+<h2>Book a Table</h2><p class="sub">Form bharein, booking request WhatsApp par chali jayegi.</p>
+<form id="bf">
+<div><label for="bn">Name</label><input id="bn" required></div>
+<div><label for="bp">Guests</label><select id="bp"><option>2</option><option>4</option><option>6</option><option>8+</option></select></div>
+<div><label for="bd">Date &amp; Time</label><input id="bd" type="datetime-local" required></div>
+<button class="btn" type="submit">Send Booking Request</button>
+</form>
+</section>
+
+<section id="visit">
+<h2>Visit Us</h2>
+<div class="hours">
+<div><strong>Lunch</strong><br>12:00 PM - 4:00 PM</div>
+<div><strong>Dinner</strong><br>7:00 PM - 12:00 AM</div>
+<div><strong>Address</strong><br>[Your address here]</div>
+</div>
+</section>
+<footer>Demo website. Aisi website apne business ke liye chahiye? <a href="https://wa.me/923101871934" style="color:var(--gold)">Fahad Mughal se rabta karein</a></footer>
+
+<script>
+var WA="923101871934";
+var MENU={
+ "BBQ":[["Chicken Tikka","2 pieces, charcoal grilled",650],["Seekh Kabab","4 pieces with chutney",700],["Mutton Chops","6 pieces, spiced",1450]],
+ "Karahi":[["Chicken Karahi","Half, serves 2",1300],["Mutton Karahi","Half, serves 2",2100],["Daal Fry","Tadka daal",450]],
+ "Breads & Sides":[["Garlic Naan","Fresh from tandoor",120],["Plain Naan","Fresh from tandoor",70],["Raita","Cool and fresh",100]],
+ "Drinks":[["Lassi","Sweet or salted",220],["Mint Margarita","Fresh mint, lemon",260],["Kashmiri Chai","Pink tea",180]]
+};
+var tabs=document.getElementById('tabs'),grid=document.getElementById('menu-grid');
+function wa(m){window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(m),"_blank","noopener");}
+function show(cat){
+ Array.prototype.forEach.call(tabs.children,function(b){b.classList.toggle('on',b.textContent===cat)});
+ grid.innerHTML="";
+ MENU[cat].forEach(function(it){
+  var d=document.createElement('div');d.className='item';
+  var l=document.createElement('div');var h=document.createElement('h3');h.textContent=it[0];var p=document.createElement('p');p.textContent=it[1];l.appendChild(h);l.appendChild(p);
+  var r=document.createElement('div');var pr=document.createElement('div');pr.className='price';pr.textContent='Rs '+it[2];
+  var b=document.createElement('button');b.className='order';b.type='button';b.textContent='Order';
+  b.onclick=function(){wa("Assalam o Alaikum, mujhe order karna hai: "+it[0]+" (Rs "+it[2]+") [Demo Restaurant]");};
+  r.appendChild(pr);r.appendChild(b);d.appendChild(l);d.appendChild(r);grid.appendChild(d);
+ });
+}
+Object.keys(MENU).forEach(function(c){var b=document.createElement('button');b.className='tab';b.type='button';b.textContent=c;b.onclick=function(){show(c)};tabs.appendChild(b);});
+show("BBQ");
+document.getElementById('bf').addEventListener('submit',function(e){e.preventDefault();
+ wa("Table booking request [Demo Restaurant]\nName: "+bn.value+"\nGuests: "+bp.value+"\nDate/Time: "+bd.value);});
+</script>
+</body>
+</html>

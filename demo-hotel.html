@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kashmir View Hotel | Demo Hotel Website</title>
+<style>
+:root{--bg:#0e1b1a;--card:#162826;--gold:#d9b66a;--cream:#f4efe6;--mute:#a9b9b6}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Georgia',serif;background:var(--bg);color:var(--cream);line-height:1.6}
+a{color:inherit;text-decoration:none}
+.demo-bar{background:var(--gold);color:#0e1b1a;text-align:center;font:600 13px system-ui;padding:8px 12px}
+.demo-bar a{text-decoration:underline}
+header{max-width:1040px;margin:0 auto;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{font-size:22px;color:var(--gold);font-weight:700}
+nav{display:flex;gap:18px;font:500 15px system-ui}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 24px;border-radius:4px;background:var(--gold);color:#0e1b1a;font:700 15px system-ui;border:0;cursor:pointer}
+.btn.o{background:none;color:var(--gold);border:2px solid var(--gold)}
+.hero{text-align:center;padding:90px 20px 80px;background:linear-gradient(180deg,#27503f 0,#14302a 55%,var(--bg) 100%)}
+.hero small{letter-spacing:4px;color:var(--gold);font:600 13px system-ui}
+.hero h1{font-size:clamp(34px,8vw,62px);line-height:1.1;margin:10px 0 14px}
+.hero p{color:var(--mute);max-width:520px;margin:0 auto 26px;font-size:18px}
+section{max-width:1040px;margin:0 auto;padding:54px 20px}
+h2{color:var(--gold);font-size:clamp(28px,5vw,38px);margin-bottom:8px}
+.sub{color:var(--mute);margin-bottom:26px}
+.rooms{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.room{background:var(--card);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.rp{height:150px}
+.rb{padding:20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.rb h3{font-size:20px}.rb p{color:var(--mute);font-size:15px}
+.rt{color:var(--gold);font:700 20px system-ui}.rt small{color:var(--mute);font-weight:400;font-size:13px}
+.g{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.g div{height:150px;border-radius:10px;display:flex;align-items:flex-end;padding:12px;font:600 14px system-ui;color:#fff}
+form{display:grid;gap:14px;max-width:560px}
+label{font:600 14px system-ui;display:block;margin-bottom:6px}
+input,select{width:100%;background:var(--card);color:var(--cream);border:1px solid #2f4a46;border-radius:6px;padding:12px;font:16px system-ui;min-height:46px}
+.two{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+.sum{color:var(--gold);font:600 15px system-ui;min-height:22px}
+footer{text-align:center;color:var(--mute);padding:34px 20px 60px;border-top:1px solid #223a36;font:14px system-ui}
+footer a{color:var(--gold)}
+@media(max-width:480px){.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="demo-bar">DEMO website, a sample made by <a href="https://wa.me/923101871934" target="_blank" rel="noopener">Fahad Mughal</a>. Hotel ka naam aur prices farzi hain.</div>
+<header><div class="logo">Kashmir View Hotel</div>
+<nav><a href="#rooms">Rooms</a><a href="#gallery">Gallery</a><a href="#book">Book</a></nav></header>
+<div class="hero"><small>BAGH, AZAD KASHMIR</small>
+<h1>Pahadon Ke Darmiyan<br>Aap Ka Sukoon</h1>
+<p>Saaf suthre kamray, garam khana aur dilkash nazaray.</p>
+<a class="btn" href="#book">Book Your Stay</a> <a class="btn o" href="#rooms">View Rooms</a></div>
+
+<section id="rooms"><h2>Our Rooms</h2><p class="sub">Har kamre mein heater, WiFi aur attached bathroom.</p>
+<div class="rooms" id="rl"></div></section>
+
+<section id="gallery"><h2>Gallery</h2><p class="sub">Asli website mein yahan aap ki apni tasaveer lagayi jati hain.</p>
+<div class="g">
+<div style="background:linear-gradient(160deg,#3e6b5a,#1c3b33)">Lobby</div>
+<div style="background:linear-gradient(160deg,#8a6b3a,#3b2c16)">Restaurant</div>
+<div style="background:linear-gradient(160deg,#4b6a8a,#1f2f44)">Mountain View</div>
+<div style="background:linear-gradient(160deg,#6b4b6b,#2e1f2e)">Lounge</div>
+</div></section>
+
+<section id="book"><h2>Booking Request</h2><p class="sub">Dates likhein, request WhatsApp par chali jayegi.</p>
+<form id="bf">
+<div><label for="bn">Name</label><input id="bn" required></div>
+<div><label for="bt">Room Type</label><select id="bt"></select></div>
+<div class="two"><div><label for="ci">Check-in</label><input id="ci" type="date" required></div>
+<div><label for="co">Check-out</label><input id="co" type="date" required></div></div>
+<div class="sum" id="sum" aria-live="polite"></div>
+<button class="btn" type="submit">Send Booking Request</button>
+</form></section>
+<footer>Demo website. Apne hotel ki website chahiye? <a href="https://wa.me/923101871934">Fahad Mughal se rabta karein</a></footer>
+
+<script>
+var WA="923101871934";
+var R=[["Standard Room","1 double bed, mountain view",6500,"#3e6b5a,#1c3b33"],["Deluxe Room","King bed, balcony, tea set",9500,"#8a6b3a,#3b2c16"],["Family Suite","2 beds, sitting area, 4 guests",14000,"#4b6a8a,#1f2f44"]];
+var rl=document.getElementById('rl'),bt=document.getElementById('bt');
+function fm(n){return "Rs "+n.toLocaleString("en-US")}
+R.forEach(function(r,i){
+ var d=document.createElement('div');d.className='room';
+ var p=document.createElement('div');p.className='rp';p.style.background='linear-gradient(160deg,'+r[3]+')';
+ var b=document.createElement('div');b.className='rb';
+ var h=document.createElement('h3');h.textContent=r[0];var t=document.createElement('p');t.textContent=r[1];
+ var pr=document.createElement('div');pr.className='rt';pr.textContent=fm(r[2]);var s=document.createElement('small');s.textContent=' / night';pr.appendChild(s);
+ var a=document.createElement('a');a.className='btn o';a.href='#book';a.textContent='Book This Room';a.onclick=function(){bt.selectedIndex=i;sum()};
+ b.appendChild(h);b.appendChild(t);b.appendChild(pr);b.appendChild(a);d.appendChild(p);d.appendChild(b);rl.appendChild(d);
+ var o=document.createElement('option');o.textContent=r[0];bt.appendChild(o);});
+var ci=document.getElementById('ci'),co=document.getElementById('co');
+var today=new Date().toISOString().slice(0,10);ci.min=today;co.min=today;
+function nights(){if(!ci.value||!co.value)return 0;return Math.round((new Date(co.value)-new Date(ci.value))/864e5)}
+function sum(){var n=nights(),el=document.getElementById('sum');
+ if(!ci.value||!co.value){el.textContent='';return}
+ if(n<=0){el.textContent='Check-out date check-in ke baad honi chahiye.';return}
+ el.textContent=n+' night(s) x '+fm(R[bt.selectedIndex][2])+' = '+fm(n*R[bt.selectedIndex][2]);}
+[ci,co,bt].forEach(function(e){e.addEventListener('change',sum)});
+document.getElementById('bf').addEventListener('submit',function(e){e.preventDefault();
+ if(nights()<=0){sum();return}
+ var m="Booking request [Demo Hotel]\nName: "+bn.value+"\nRoom: "+bt.value+"\nCheck-in: "+ci.value+"\nCheck-out: "+co.value+"\nNights: "+nights();
+ window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(m),"_blank","noopener");});
+</script>
+</body>
+</html>

@@ -85,16 +85,16 @@
     ],
     // liveUrl: asli demo link yahan likhein. "" chhorenge to "Demo coming soon" dikhega.
     demos: [
-      { title: "Restaurant Website", tag: "DEMO", liveUrl: "",
+      { title: "Restaurant Website", tag: "DEMO", liveUrl: "demo-restaurant.html",
         short: "Menu, booking request, WhatsApp order.",
         detail: "Menu categories, table booking request form aur ek click WhatsApp order button." },
-      { title: "School Website", tag: "DEMO", liveUrl: "",
+      { title: "School Website", tag: "DEMO", liveUrl: "demo-school.html",
         short: "Admissions, notices, student portal demo.",
         detail: "Admission info, notice board, class-wise results aur student portal ka demo page." },
-      { title: "Online Store", tag: "DEMO", liveUrl: "",
+      { title: "Online Store", tag: "DEMO", liveUrl: "demo-store.html",
         short: "Products, cart, checkout.",
         detail: "Product listing, cart, checkout flow aur mobile friendly shopping experience." },
-      { title: "Hotel Website", tag: "DEMO", liveUrl: "",
+      { title: "Hotel Website", tag: "DEMO", liveUrl: "demo-hotel.html",
         short: "Rooms, gallery, booking request.",
         detail: "Room types, photo gallery aur booking request form." }
     ],

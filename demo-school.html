@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bright Future Public School | Demo School Website</title>
+<style>
+:root{--navy:#12306b;--blue:#1d4fb8;--sun:#f7b32b;--bg:#f4f7fc;--ink:#14213d;--mute:#5b6b8a}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+a{color:inherit;text-decoration:none}
+.demo-bar{background:var(--sun);color:#14213d;text-align:center;font-weight:600;font-size:13px;padding:8px 12px}
+.demo-bar a{text-decoration:underline}
+header{background:var(--navy);color:#fff}
+.bar{max-width:1040px;margin:0 auto;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{font-weight:800;font-size:20px}
+nav{display:flex;gap:18px;font-size:15px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 22px;border-radius:12px;background:var(--sun);color:#14213d;font:700 15px system-ui;border:0;cursor:pointer}
+.btn.b{background:var(--blue);color:#fff}
+.hero{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;padding:70px 20px;text-align:center}
+.hero h1{font-size:clamp(32px,7vw,54px);line-height:1.15;margin-bottom:12px}
+.hero p{max-width:540px;margin:0 auto 24px;opacity:.9;font-size:18px}
+section{max-width:1040px;margin:0 auto;padding:52px 20px}
+h2{font-size:clamp(26px,5vw,34px);color:var(--navy);margin-bottom:8px}
+.sub{color:var(--mute);margin-bottom:26px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:#fff;border-radius:16px;padding:22px;box-shadow:0 2px 10px rgba(18,48,107,.08)}
+.card h3{color:var(--blue);margin-bottom:6px}
+.num{font-size:36px;font-weight:800;color:var(--navy)}
+.notice{display:flex;gap:14px;background:#fff;border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 2px 10px rgba(18,48,107,.06)}
+.date{flex:none;background:var(--navy);color:#fff;border-radius:10px;padding:8px 12px;text-align:center;font-weight:700;line-height:1.2}
+.date small{display:block;font-weight:500;font-size:12px}
+form{display:grid;gap:14px;max-width:520px}
+label{font-weight:600;font-size:14px;display:block;margin-bottom:6px}
+input,select,textarea{width:100%;border:1px solid #c5d0e6;border-radius:12px;padding:12px;font:16px system-ui;min-height:46px;background:#fff;color:var(--ink)}
+.res{background:#fff;border-radius:14px;padding:18px;margin-top:16px;max-width:520px;display:none}
+.res table{width:100%;border-collapse:collapse;margin-top:10px}
+.res td,.res th{padding:8px;border-bottom:1px solid #e2e8f5;text-align:left}
+.err{color:#b00020;margin-top:8px}
+footer{background:var(--navy);color:#cfd9ef;text-align:center;padding:30px 20px;font-size:14px}
+footer a{color:var(--sun)}
+</style>
+</head>
+<body>
+<div class="demo-bar">DEMO website, a sample made by <a href="https://wa.me/923101871934" target="_blank" rel="noopener">Fahad Mughal</a>. School ka naam aur data farzi hain.</div>
+<header><div class="bar"><div class="logo">Bright Future Public School</div>
+<nav><a href="#about">About</a><a href="#notices">Notices</a><a href="#portal">Student Portal</a><a href="#admission">Admission</a></nav></div></header>
+
+<div class="hero"><h1>Taleem Jo Roshan Mustaqbil Banaye</h1>
+<p>Nursery se Matric tak. Tajurbakar asatiza, saaf mahaul aur jadeed taleem.</p>
+<a class="btn" href="#admission">Apply for Admission</a></div>
+
+<section id="about"><h2>Hamare Baare Mein</h2><p class="sub">Aik nazar mein.</p>
+<div class="grid">
+<div class="card"><div class="num">25+</div><h3>Qualified Teachers</h3><p>Har class ke liye mahir asatiza.</p></div>
+<div class="card"><div class="num">600+</div><h3>Students</h3><p>Nursery se Class 10 tak.</p></div>
+<div class="card"><div class="num">100%</div><h3>Computer Lab</h3><p>Har class ko haftay mein computer period.</p></div>
+</div></section>
+
+<section id="notices"><h2>Notice Board</h2><p class="sub">Taaza ittilaat.</p>
+<div id="nlist"></div></section>
+
+<section id="portal"><h2>Student Portal (Demo)</h2>
+<p class="sub">Result dekhne ke liye demo roll number likhein: <strong>101</strong>, <strong>102</strong> ya <strong>103</strong>.</p>
+<form id="rf"><div><label for="roll">Roll Number</label><input id="roll" inputmode="numeric" required></div>
+<button class="btn b" type="submit">View Result</button></form>
+<div class="res" id="res"></div></section>
+
+<section id="admission"><h2>Admission Form</h2><p class="sub">Form bharein, request WhatsApp par chali jayegi.</p>
+<form id="af">
+<div><label for="sn">Student Name</label><input id="sn" required></div>
+<div><label for="sc">Class</label><select id="sc"><option>Nursery</option><option>Prep</option><option>Class 1-5</option><option>Class 6-8</option><option>Class 9-10</option></select></div>
+<div><label for="pn">Parent WhatsApp Number</label><input id="pn" type="tel" required></div>
+<button class="btn" type="submit">Send Admission Request</button></form></section>
+<footer>Demo website. Apne school ki website chahiye? <a href="https://wa.me/923101871934">Fahad Mughal se rabta karein</a></footer>
+
+<script>
+var WA="923101871934";
+function wa(m){window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(m),"_blank","noopener");}
+var NOTICES=[["15","Nov","Admissions open for new session"],["22","Nov","Parent-teacher meeting, 10 AM"],["05","Dec","Annual sports day"],["20","Dec","Winter vacations start"]];
+var nl=document.getElementById('nlist');
+NOTICES.forEach(function(n){var d=document.createElement('div');d.className='notice';
+ var dt=document.createElement('div');dt.className='date';dt.textContent=n[0];var s=document.createElement('small');s.textContent=n[1];dt.appendChild(s);
+ var t=document.createElement('div');t.textContent=n[2];d.appendChild(dt);d.appendChild(t);nl.appendChild(d);});
+var R={"101":{name:"Ali Raza",cls:"Class 8",marks:[["English",82],["Urdu",78],["Maths",91],["Science",85]]},
+"102":{name:"Ayesha Khan",cls:"Class 8",marks:[["English",90],["Urdu",88],["Maths",76],["Science",93]]},
+"103":{name:"Hamza Sardar",cls:"Class 8",marks:[["English",70],["Urdu",74],["Maths",80],["Science",68]]}};
+document.getElementById('rf').addEventListener('submit',function(e){e.preventDefault();
+ var r=R[roll.value.trim()],box=document.getElementById('res');box.style.display='block';box.textContent='';
+ if(!r){var p=document.createElement('p');p.className='err';p.textContent='Is roll number ka demo result nahi mila (101, 102 ya 103 try karein).';box.appendChild(p);return;}
+ var h=document.createElement('h3');h.textContent=r.name+" - "+r.cls;box.appendChild(h);
+ var t=document.createElement('table'),tot=0;
+ r.marks.forEach(function(m){tot+=m[1];var tr=t.insertRow();tr.insertCell().textContent=m[0];tr.insertCell().textContent=m[1]+" / 100";});
+ var f=t.insertRow();var c=f.insertCell();c.textContent="Total";c.style.fontWeight="700";var c2=f.insertCell();c2.textContent=tot+" / "+(r.marks.length*100);c2.style.fontWeight="700";
+ box.appendChild(t);});
+document.getElementById('af').addEventListener('submit',function(e){e.preventDefault();
+ wa("Admission request [Demo School]\nStudent: "+sn.value+"\nClass: "+sc.value+"\nParent WhatsApp: "+pn.value);});
+</script>
+</body>
+</html>
