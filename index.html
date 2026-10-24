@@ -55,13 +55,25 @@ input:focus,textarea:focus{outline:2px solid var(--accent);border-color:transpar
 textarea{min-height:120px;resize:vertical}
 footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:.88rem;text-align:center}
 @media(max-width:720px){.hero-grid{grid-template-columns:1fr}.photo{order:-1;max-width:240px}nav ul{display:none}.contact{grid-template-columns:1fr}.hero{padding:50px 0 30px}}
+
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.gal-i{position:relative;display:block;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--card);aspect-ratio:9/16}
+.gal-i img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .3s}
+.gal-i:hover img{transform:scale(1.04)}
+.gal-c{position:absolute;left:0;right:0;bottom:0;padding:26px 10px 9px;font-size:.78rem;color:#e8eef5;background:linear-gradient(transparent,rgba(5,8,12,.92));line-height:1.3}
+.gal-c b{display:block;font-size:.84rem}
+#lb{position:fixed;inset:0;z-index:50;background:rgba(5,8,12,.94);display:none;align-items:center;justify-content:center;flex-direction:column;gap:10px;padding:14px}
+#lb.on{display:flex}
+#lb img{max-width:100%;max-height:82vh;border-radius:12px}
+#lb p{color:#e8eef5;font-size:.9rem}
+#lb button{position:absolute;top:12px;right:14px;background:none;border:0;color:#fff;font-size:34px;cursor:pointer;line-height:1}
 </style>
   <link rel="stylesheet" href="fm-colors.css">
 </head>
 <body>
 <header><div class="wrap"><nav>
 <a href="#home" class="logo">Fahad<span>.</span></a>
-<ul><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#projects">Projects</a></li><li><a href="#skills">Skills</a></li><li><a href="#contact">Contact</a></li></ul>
+<ul><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#projects">Projects</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#skills">Skills</a></li><li><a href="#contact">Contact</a></li></ul>
 <a href="#contact" class="btn primary">Hire Me</a>
 </nav></div></header>
 
@@ -106,6 +118,30 @@ footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-s
 <div class="card"><h3>Cash Book App (Bahi-Khata)</h3><p>Browser-based cash book with local storage, PKR formatting and Urdu interface elements.</p><p style="margin-top:14px"><a class="btn primary" href="demo-cashbook.html" target="_blank" rel="noopener">Live Demo →</a></p></div>
 <div class="card"><h3>E-commerce Store Design</h3><p>A premium-looking online store design aimed at Pakistani customers.</p><p style="margin-top:14px"><a class="btn primary" href="demo-ecommerce.html" target="_blank" rel="noopener">Live Demo →</a></p></div>
 <div class="card"><h3>Web Development Promo Poster</h3><p>Promotional design to present web development services professionally.</p><p style="margin-top:14px"><a class="btn primary" href="promo-poster.png" target="_blank" rel="noopener">View Poster →</a></p></div>
+</div>
+</div></section>
+
+
+<section id="gallery"><div class="wrap">
+<h2>Gallery</h2>
+<p class="sub">Screenshots of websites I have designed. Tap any picture to view it bigger.</p>
+<div class="gal">
+<a class="gal-i" href="college-hero.jpg" data-cap="Model Degree College - Home page"><img src="college-hero.jpg" alt="Model Degree College website design: Home page" loading="lazy" width="540" height="1134"><span class="gal-c"><b>Model Degree College</b>Home page</span></a>
+<a class="gal-i" href="college-story.jpg" data-cap="Model Degree College - About section"><img src="college-story.jpg" alt="Model Degree College website design: About section" loading="lazy" width="540" height="1134"><span class="gal-c"><b>Model Degree College</b>About section</span></a>
+<a class="gal-i" href="college-programs.jpg" data-cap="Model Degree College - Programs"><img src="college-programs.jpg" alt="Model Degree College website design: Programs" loading="lazy" width="540" height="1134"><span class="gal-c"><b>Model Degree College</b>Programs</span></a>
+<a class="gal-i" href="college-courses.jpg" data-cap="Model Degree College - Courses"><img src="college-courses.jpg" alt="Model Degree College website design: Courses" loading="lazy" width="540" height="1134"><span class="gal-c"><b>Model Degree College</b>Courses</span></a>
+<a class="gal-i" href="college-ib-arts.jpg" data-cap="Model Degree College - IB &amp; Arts"><img src="college-ib-arts.jpg" alt="Model Degree College website design: IB &amp; Arts" loading="lazy" width="540" height="1134"><span class="gal-c"><b>Model Degree College</b>IB &amp; Arts</span></a>
+<a class="gal-i" href="college-faculty.jpg" data-cap="Model Degree College - Faculty"><img src="college-faculty.jpg" alt="Model Degree College website design: Faculty" loading="lazy" width="540" height="1134"><span class="gal-c"><b>Model Degree College</b>Faculty</span></a>
+<a class="gal-i" href="cafe-hero.jpg" data-cap="Mountain Cafe - Home page"><img src="cafe-hero.jpg" alt="Mountain Cafe website design: Home page" loading="lazy" width="540" height="1134"><span class="gal-c"><b>Mountain Cafe</b>Home page</span></a>
+<a class="gal-i" href="cafe-menu.jpg" data-cap="Mountain Cafe - Menu"><img src="cafe-menu.jpg" alt="Mountain Cafe website design: Menu" loading="lazy" width="540" height="1134"><span class="gal-c"><b>Mountain Cafe</b>Menu</span></a>
+<a class="gal-i" href="cafe-bites.jpg" data-cap="Mountain Cafe - Tea &amp; Bites"><img src="cafe-bites.jpg" alt="Mountain Cafe website design: Tea &amp; Bites" loading="lazy" width="540" height="1134"><span class="gal-c"><b>Mountain Cafe</b>Tea &amp; Bites</span></a>
+<a class="gal-i" href="cafe-contact.jpg" data-cap="Mountain Cafe - Contact &amp; booking"><img src="cafe-contact.jpg" alt="Mountain Cafe website design: Contact &amp; booking" loading="lazy" width="540" height="1134"><span class="gal-c"><b>Mountain Cafe</b>Contact &amp; booking</span></a>
+<a class="gal-i" href="academy-hero.jpg" data-cap="Roshan Academy - Home page"><img src="academy-hero.jpg" alt="Roshan Academy website design: Home page" loading="lazy" width="540" height="1134"><span class="gal-c"><b>Roshan Academy</b>Home page</span></a>
+<a class="gal-i" href="academy-why.jpg" data-cap="Roshan Academy - Features"><img src="academy-why.jpg" alt="Roshan Academy website design: Features" loading="lazy" width="540" height="1134"><span class="gal-c"><b>Roshan Academy</b>Features</span></a>
+<a class="gal-i" href="academy-fees.jpg" data-cap="Roshan Academy - Monthly fees"><img src="academy-fees.jpg" alt="Roshan Academy website design: Monthly fees" loading="lazy" width="540" height="1134"><span class="gal-c"><b>Roshan Academy</b>Monthly fees</span></a>
+<a class="gal-i" href="store-hero.jpg" data-cap="Kashmir Threads Store - Home page"><img src="store-hero.jpg" alt="Kashmir Threads Store website design: Home page" loading="lazy" width="540" height="1134"><span class="gal-c"><b>Kashmir Threads Store</b>Home page</span></a>
+<a class="gal-i" href="store-products.jpg" data-cap="Kashmir Threads Store - Winter collection"><img src="store-products.jpg" alt="Kashmir Threads Store website design: Winter collection" loading="lazy" width="540" height="1134"><span class="gal-c"><b>Kashmir Threads Store</b>Winter collection</span></a>
+<a class="gal-i" href="store-more.jpg" data-cap="Kashmir Threads Store - Products"><img src="store-more.jpg" alt="Kashmir Threads Store website design: Products" loading="lazy" width="540" height="1134"><span class="gal-c"><b>Kashmir Threads Store</b>Products</span></a>
 </div>
 </div></section>
 
@@ -172,6 +208,19 @@ document.getElementById('f').addEventListener('submit',function(ev){
   }).catch(function(){btn.textContent='Error, try again'})
   .then(function(){setTimeout(function(){btn.disabled=false;btn.textContent=old},3500)});
 });
+</script>
+
+<div id="lb" role="dialog" aria-label="Image viewer"><button type="button" aria-label="Close" id="lbx">&times;</button><img alt="" id="lbi"><p id="lbp"></p></div>
+<script>
+(function(){
+  var lb=document.getElementById('lb'),im=document.getElementById('lbi'),cp=document.getElementById('lbp');
+  function close(){lb.classList.remove('on')}
+  document.querySelectorAll('.gal-i').forEach(function(a){
+    a.addEventListener('click',function(e){e.preventDefault();im.src=a.getAttribute('href');im.alt=a.querySelector('img').alt;cp.textContent=a.dataset.cap;lb.classList.add('on')});
+  });
+  lb.addEventListener('click',function(e){if(e.target!==im)close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+})();
 </script>
 <script src="fm-all.js"></script>
 </body>
