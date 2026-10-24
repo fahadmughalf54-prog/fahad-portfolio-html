@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cash Book App</title>
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--line:#334155;--text:#e2e8f0;--mute:#94a3b8;--in:#34d399;--out:#f87171;--acc:#60a5fa}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:16px}
+.app{max-width:560px;margin:0 auto}
+h1{font-size:22px;margin:6px 0 14px;display:flex;justify-content:space-between;align-items:center}
+h1 a{font-size:13px;color:var(--acc);text-decoration:none}
+.bal{background:linear-gradient(135deg,#2563eb,#7c3aed);border-radius:18px;padding:20px;margin-bottom:14px}
+.bal small{opacity:.85}
+.bal .big{font-size:34px;font-weight:800;margin:4px 0 12px}
+.row{display:flex;gap:10px}
+.row div{flex:1;background:rgba(255,255,255,.15);border-radius:12px;padding:10px}
+.row b{display:block;font-size:17px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:14px}
+.card h2{font-size:15px;margin-bottom:10px;color:var(--mute);font-weight:600}
+input,select,button{font:inherit;border-radius:10px;border:1px solid var(--line);background:#0b1220;color:var(--text);padding:11px;width:100%}
+.form{display:grid;gap:8px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+button{cursor:pointer;border:0;font-weight:700}
+.add{background:var(--acc);color:#04122b}
+.tabs{display:flex;gap:6px;margin-bottom:10px}
+.tabs button{background:#0b1220;color:var(--mute);border:1px solid var(--line);padding:8px}
+.tabs button.on{background:var(--acc);color:#04122b;border-color:var(--acc)}
+.item{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
+.item:last-child{border:0}
+.dot{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-weight:800;flex:none}
+.in .dot{background:rgba(52,211,153,.15);color:var(--in)}
+.out .dot{background:rgba(248,113,113,.15);color:var(--out)}
+.mid{flex:1;min-width:0}
+.mid b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mid small{color:var(--mute)}
+.amt{font-weight:700}
+.in .amt{color:var(--in)}.out .amt{color:var(--out)}
+.del{width:30px;padding:4px;background:transparent;color:var(--mute);font-size:18px}
+.empty{text-align:center;color:var(--mute);padding:18px 0}
+.foot{display:flex;gap:8px}
+.foot button{background:#0b1220;border:1px solid var(--line);color:var(--mute);font-size:13px}
+</style>
+</head>
+<body>
+<div class="app">
+  <h1>📒 Cash Book <a href="index.html">← Portfolio</a></h1>
+
+  <div class="bal">
+    <small>Current Balance</small>
+    <div class="big" id="bal">Rs 0</div>
+    <div class="row">
+      <div><small>Cash In</small><b id="tin">Rs 0</b></div>
+      <div><small>Cash Out</small><b id="tout">Rs 0</b></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>New Entry</h2>
+    <div class="form">
+      <div class="two">
+        <select id="type"><option value="in">➕ Cash In (Income)</option><option value="out">➖ Cash Out (Expense)</option></select>
+        <input id="amount" type="number" inputmode="numeric" placeholder="Amount (Rs)">
+      </div>
+      <div class="two">
+        <input id="note" placeholder="Details (e.g. Salary, Rent)">
+        <select id="cat">
+          <option>General</option><option>Salary</option><option>Food</option><option>Bills</option>
+          <option>Shopping</option><option>Travel</option><option>Business</option>
+        </select>
+      </div>
+      <button class="add" onclick="addEntry()">Save Entry</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>History</h2>
+    <div class="tabs">
+      <button class="on" data-f="all">All</button>
+      <button data-f="in">In</button>
+      <button data-f="out">Out</button>
+    </div>
+    <div id="list"></div>
+  </div>
+
+  <div class="foot">
+    <button onclick="exportCSV()">⬇ Export CSV</button>
+    <button onclick="clearAll()">🗑 Clear All</button>
+  </div>
+</div>
+
+<script>
+var KEY="fm_cashbook_v1", filter="all", data=[];
+try{data=JSON.parse(localStorage.getItem(KEY))||[]}catch(e){data=[]}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){}}
+function rs(n){return "Rs "+Number(n).toLocaleString("en-PK")}
+function addEntry(){
+  var amt=parseFloat(document.getElementById("amount").value);
+  if(!amt||amt<=0){alert("Amount likhein");return}
+  data.unshift({
+    id:Date.now(),
+    type:document.getElementById("type").value,
+    amt:amt,
+    note:document.getElementById("note").value.trim()||"No details",
+    cat:document.getElementById("cat").value,
+    date:new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"})
+  });
+  document.getElementById("amount").value="";
+  document.getElementById("note").value="";
+  save();render();
+}
+function del(id){data=data.filter(function(x){return x.id!==id});save();render()}
+function clearAll(){if(confirm("Saari entries delete karni hain?")){data=[];save();render()}}
+function exportCSV(){
+  var rows=[["Date","Type","Category","Details","Amount"]];
+  data.forEach(function(x){rows.push([x.date,x.type==="in"?"Cash In":"Cash Out",x.cat,'"'+x.note.replace(/"/g,'""')+'"',x.amt])});
+  var blob=new Blob([rows.map(function(r){return r.join(",")}).join("\n")],{type:"text/csv"});
+  var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="cashbook.csv";a.click();
+}
+function render(){
+  var tin=0,tout=0;
+  data.forEach(function(x){x.type==="in"?tin+=x.amt:tout+=x.amt});
+  document.getElementById("tin").textContent=rs(tin);
+  document.getElementById("tout").textContent=rs(tout);
+  document.getElementById("bal").textContent=rs(tin-tout);
+  var list=data.filter(function(x){return filter==="all"||x.type===filter});
+  var el=document.getElementById("list");
+  if(!list.length){el.innerHTML='<div class="empty">Abhi koi entry nahi</div>';return}
+  el.innerHTML=list.map(function(x){
+    return '<div class="item '+x.type+'"><div class="dot">'+(x.type==="in"?"+":"−")+'</div>'+
+    '<div class="mid"><b>'+esc(x.note)+'</b><small>'+esc(x.cat)+' · '+x.date+'</small></div>'+
+    '<div class="amt">'+(x.type==="in"?"+":"-")+rs(x.amt)+'</div>'+
+    '<button class="del" onclick="del('+x.id+')">×</button></div>';
+  }).join("");
+}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+document.querySelectorAll(".tabs button").forEach(function(b){
+  b.onclick=function(){
+    document.querySelectorAll(".tabs button").forEach(function(x){x.classList.remove("on")});
+    b.classList.add("on");filter=b.dataset.f;render();
+  }
+});
+render();
+</script>
+</body>
+</html>

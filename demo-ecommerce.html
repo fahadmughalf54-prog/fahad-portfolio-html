@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Urban Cart - E-commerce Store Design</title>
+<style>
+:root{--ink:#111827;--mute:#6b7280;--line:#e5e7eb;--bg:#f8fafc;--acc:#f43f5e;--acc2:#7c3aed}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+a{text-decoration:none;color:inherit}
+.top{background:var(--ink);color:#fff;text-align:center;font-size:12px;padding:7px}
+header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.nav{max-width:1100px;margin:auto;display:flex;align-items:center;gap:14px;padding:12px 16px}
+.logo{font-weight:900;font-size:20px;letter-spacing:-.5px}
+.logo span{color:var(--acc)}
+.search{flex:1;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:10px 14px;font:inherit;min-width:0}
+.cartbtn{background:var(--ink);color:#fff;border:0;border-radius:999px;padding:10px 16px;font-weight:700;cursor:pointer;white-space:nowrap}
+.hero{max-width:1100px;margin:16px auto;padding:0 16px}
+.banner{border-radius:22px;padding:34px 26px;color:#fff;background:linear-gradient(120deg,var(--acc2),var(--acc));display:grid;gap:10px}
+.banner h1{font-size:clamp(26px,6vw,44px);line-height:1.1}
+.banner p{opacity:.92;max-width:460px}
+.banner a{background:#fff;color:var(--ink);font-weight:800;padding:12px 20px;border-radius:999px;width:max-content}
+.cats{max-width:1100px;margin:0 auto;padding:6px 16px;display:flex;gap:8px;overflow:auto}
+.cats button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 16px;font:inherit;font-weight:600;cursor:pointer;white-space:nowrap}
+.cats button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+h2{max-width:1100px;margin:14px auto 8px;padding:0 16px;font-size:20px}
+.grid{max-width:1100px;margin:auto;padding:0 16px 30px;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+.p{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:.2s}
+.p:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.08)}
+.img{height:150px;display:grid;place-items:center;font-size:58px;position:relative}
+.tag{position:absolute;top:10px;left:10px;background:var(--acc);color:#fff;font-size:11px;font-weight:800;padding:3px 8px;border-radius:999px}
+.info{padding:12px}
+.info b{display:block;font-size:14px}
+.info small{color:var(--mute)}
+.pr{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.pr strong{font-size:15px}
+.pr s{color:var(--mute);font-size:12px;margin-left:4px}
+.add{background:var(--ink);color:#fff;border:0;border-radius:10px;width:34px;height:34px;font-size:20px;cursor:pointer}
+.feat{max-width:1100px;margin:0 auto 20px;padding:0 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.feat div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;font-size:14px}
+.feat b{display:block;margin-bottom:2px}
+footer{background:var(--ink);color:#9ca3af;text-align:center;padding:22px 16px;font-size:13px}
+footer a{color:#fff;font-weight:700}
+.drawer{position:fixed;right:0;top:0;bottom:0;width:min(360px,100%);background:#fff;box-shadow:-10px 0 40px rgba(0,0,0,.2);transform:translateX(105%);transition:.3s;z-index:20;display:flex;flex-direction:column}
+.drawer.open{transform:none}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:16px;border-bottom:1px solid var(--line);font-weight:800}
+.dh button{border:0;background:none;font-size:24px;cursor:pointer}
+.items{flex:1;overflow:auto;padding:8px 16px}
+.ci{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.ci .e{font-size:30px}
+.ci div{flex:1;font-size:14px}
+.ci button{border:0;background:var(--bg);width:26px;height:26px;border-radius:8px;cursor:pointer}
+.df{padding:16px;border-top:1px solid var(--line)}
+.df .t{display:flex;justify-content:space-between;font-weight:800;font-size:18px;margin-bottom:10px}
+.df a{display:block;text-align:center;background:var(--acc);color:#fff;font-weight:800;padding:13px;border-radius:12px}
+.empty{text-align:center;color:var(--mute);padding:30px 0}
+</style>
+</head>
+<body>
+<div class="top">🚚 Free delivery on orders above Rs 3,000 · Cash on Delivery available</div>
+<header>
+  <div class="nav">
+    <a class="logo" href="#">Urban<span>Cart</span></a>
+    <input class="search" id="q" placeholder="Search products...">
+    <button class="cartbtn" onclick="toggleCart()">🛒 Cart (<span id="cnt">0</span>)</button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="banner">
+    <h1>Mega Sale<br>Up to 40% OFF</h1>
+    <p>Shoes, watches, bags and gadgets. Best prices, fast delivery all over Pakistan.</p>
+    <a href="#shop">Shop Now →</a>
+  </div>
+</div>
+
+<div class="cats" id="cats"></div>
+<h2 id="shop">Popular Products</h2>
+<div class="grid" id="grid"></div>
+
+<div class="feat">
+  <div><b>🚚 Fast Delivery</b>2-4 working days nationwide</div>
+  <div><b>💵 Cash on Delivery</b>Pay when you receive</div>
+  <div><b>🔁 Easy Returns</b>7 days return policy</div>
+  <div><b>🔒 Secure</b>Safe and trusted shopping</div>
+</div>
+
+<footer>
+  Design demo by <a href="index.html">Fahad Mughal</a> · Want a store like this? Contact me on WhatsApp
+</footer>
+
+<div class="drawer" id="drawer">
+  <div class="dh">Your Cart <button onclick="toggleCart()">×</button></div>
+  <div class="items" id="items"></div>
+  <div class="df">
+    <div class="t"><span>Total</span><span id="total">Rs 0</span></div>
+    <a href="#" onclick="alert('Demo only: checkout yahan connect hoga.');return false">Checkout</a>
+  </div>
+</div>
+
+<script>
+var P=[
+ {id:1,n:"Running Sneakers",c:"Shoes",p:3499,o:4999,e:"👟",bg:"#fee2e2",t:"-30%"},
+ {id:2,n:"Classic Watch",c:"Watches",p:4299,o:5999,e:"⌚",bg:"#dbeafe",t:"-28%"},
+ {id:3,n:"Leather Bag",c:"Bags",p:2799,o:3999,e:"👜",bg:"#fef3c7",t:"-30%"},
+ {id:4,n:"Wireless Earbuds",c:"Gadgets",p:2499,o:3499,e:"🎧",bg:"#ede9fe",t:"HOT"},
+ {id:5,n:"Smart Band",c:"Gadgets",p:1999,o:2999,e:"📱",bg:"#dcfce7",t:"-33%"},
+ {id:6,n:"Sunglasses",c:"Fashion",p:1299,o:1999,e:"🕶️",bg:"#ffedd5",t:"NEW"},
+ {id:7,n:"Casual Sandals",c:"Shoes",p:1599,o:2299,e:"🩴",bg:"#cffafe",t:"-30%"},
+ {id:8,n:"Backpack",c:"Bags",p:2199,o:2999,e:"🎒",bg:"#fce7f3",t:"-27%"}
+];
+var cart={}, cat="All";
+function rs(n){return "Rs "+n.toLocaleString("en-PK")}
+function cats(){
+  var list=["All"].concat(P.map(function(x){return x.c}).filter(function(v,i,a){return a.indexOf(v)===i}));
+  document.getElementById("cats").innerHTML=list.map(function(c){return '<button class="'+(c===cat?"on":"")+'" onclick="setCat(\''+c+'\')">'+c+'</button>'}).join("");
+}
+function setCat(c){cat=c;cats();grid()}
+function grid(){
+  var q=document.getElementById("q").value.toLowerCase();
+  var l=P.filter(function(x){return (cat==="All"||x.c===cat)&&x.n.toLowerCase().indexOf(q)>-1});
+  document.getElementById("grid").innerHTML=l.length?l.map(function(x){
+    return '<div class="p"><div class="img" style="background:'+x.bg+'"><span class="tag">'+x.t+'</span>'+x.e+'</div>'+
+    '<div class="info"><b>'+x.n+'</b><small>'+x.c+'</small><div class="pr"><div><strong>'+rs(x.p)+'</strong><s>'+rs(x.o)+'</s></div>'+
+    '<button class="add" onclick="add('+x.id+')">+</button></div></div></div>';
+  }).join(""):'<div class="empty" style="grid-column:1/-1">Koi product nahi mila</div>';
+}
+function add(id){cart[id]=(cart[id]||0)+1;draw();document.getElementById("drawer").classList.add("open")}
+function chg(id,d){cart[id]=(cart[id]||0)+d;if(cart[id]<=0)delete cart[id];draw()}
+function toggleCart(){document.getElementById("drawer").classList.toggle("open")}
+function draw(){
+  var ids=Object.keys(cart),n=0,t=0;
+  var h=ids.map(function(id){
+    var x=P.filter(function(p){return p.id==id})[0];n+=cart[id];t+=x.p*cart[id];
+    return '<div class="ci"><div class="e">'+x.e+'</div><div><b>'+x.n+'</b><br>'+rs(x.p)+' × '+cart[id]+'</div>'+
+    '<button onclick="chg('+id+',-1)">−</button><button onclick="chg('+id+',1)">+</button></div>';
+  }).join("");
+  document.getElementById("items").innerHTML=h||'<div class="empty">Cart khali hai</div>';
+  document.getElementById("cnt").textContent=n;
+  document.getElementById("total").textContent=rs(t);
+}
+document.getElementById("q").oninput=grid;
+cats();grid();draw();
+</script>
+</body>
+</html>
